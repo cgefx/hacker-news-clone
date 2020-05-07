@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { fetchMainPosts } from '../utils/api';
+import PostsList from './PostsList';
 
 export default class Posts extends Component {
 	constructor(props) {
@@ -52,9 +54,13 @@ export default class Posts extends Component {
 		}
 
 		if (error) {
-			return <p className='center-text error'>{error}</p>; //?maybe make component
+			return <p className='center-text error'>{error}</p>; //!maybe make component
 		}
 		console.log(posts);
-		return <div>Posts</div>;
+		return <PostsList posts={posts} />;
 	}
 }
+
+Posts.propTypes = {
+	type: PropTypes.oneOf(['top', 'new']),
+};

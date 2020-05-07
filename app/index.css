@@ -37,6 +37,12 @@ li {
 	justify-content: space-between;
 }
 
+.link {
+	color: rgb(187, 46, 31);
+	text-decoration: none;
+	font-weight: bold;
+}
+
 .nav-link {
 	font-size: 18px;
 	font-weight: bold;
@@ -59,4 +65,17 @@ li {
 
 .center-text {
 	text-align: center;
+}
+
+.post {
+	margin: 20px 0;
+}
+
+.meta-info-light a {
+	color: black;
+}
+
+.meta-info-light span {
+	margin: 10px 0;
+	margin-right: 6px;
 }
