@@ -56,3 +56,7 @@ li {
 .text-lg {
 	font-size: 30px;
 }
+
+.center-text {
+	text-align: center;
+}
