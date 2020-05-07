@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { formatDate } from '../utils/helpers';
 
 const PostMetaInfo = ({ by, time, id, descendants }) => {
 	return (
@@ -8,7 +9,7 @@ const PostMetaInfo = ({ by, time, id, descendants }) => {
 			<span>
 				by <Link to={`/user?id=${by}`}>{by}</Link>
 			</span>
-			<span> on {time} </span>
+			<span> on {formatDate(time)} </span>
 			{typeof descendants === 'number' && (
 				<span>
 					with <Link to={`/post?id=${id}`}>{descendants}</Link> comments

@@ -71,6 +71,11 @@ li {
 	margin: 20px 0;
 }
 
+.meta-info-light {
+	margin-top: 5px;
+	color: gray;
+}
+
 .meta-info-light a {
 	color: black;
 }
