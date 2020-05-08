@@ -4,6 +4,7 @@ import { fetchUser, fetchPosts } from '../utils/api';
 import { formatDate } from '../utils/helpers';
 import PostsList from './PostsList';
 import Loading from './Loading';
+import { ThemeConsumer } from '../contexts/theme';
 
 export default class User extends Component {
 	constructor(props) {
@@ -53,28 +54,32 @@ export default class User extends Component {
 		}
 
 		return (
-			<>
-				{loadingUser === true ? (
-					<Loading text='Fetching User' />
-				) : (
+			<ThemeConsumer>
+				{({ theme }) => (
 					<>
-						<h1 className='header'>{user.id}</h1>
-						<div className='meta-info-light'>
-							<span>joined {formatDate(user.created)}</span>
-							<span>has {user.karma.toLocaleString()} karma</span>
-						</div>
-						<p dangerouslySetInnerHTML={{ __html: user.about }} />
+						{loadingUser === true ? (
+							<Loading text='Fetching User' />
+						) : (
+							<>
+								<h1 className='header'>{user.id}</h1>
+								<div className={`meta-info-${theme}`}>
+									<span>joined {formatDate(user.created)}</span>
+									<span>has {user.karma.toLocaleString()} karma</span>
+								</div>
+								<p dangerouslySetInnerHTML={{ __html: user.about }} />
+							</>
+						)}
+						{loadingPosts === true ? (
+							loadingUser === false && <Loading text='Fetching Posts' />
+						) : (
+							<>
+								<h2>Posts</h2>
+								<PostsList posts={posts} />
+							</>
+						)}
 					</>
 				)}
-				{loadingPosts === true ? (
-					loadingUser === false && <Loading text='Fetching Posts' />
-				) : (
-					<>
-						<h2>Posts</h2>
-						<PostsList posts={posts} />
-					</>
-				)}
-			</>
+			</ThemeConsumer>
 		);
 	}
 }

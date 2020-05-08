@@ -53,7 +53,6 @@ export default class Post extends Component {
 			return <p>{error}</p>;
 		}
 
-		console.log(comments);
 		return (
 			<>
 				{loadingPost === true ? (
