@@ -8,7 +8,9 @@ const Title = ({ url, title, id }) => {
 			{title}
 		</a>
 	) : (
-		<Link to={`/post?id=${id}`}>{title}</Link>
+		<Link className='link' to={`/post?id=${id}`}>
+			{title}
+		</Link>
 	);
 };
 

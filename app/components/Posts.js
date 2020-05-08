@@ -23,6 +23,7 @@ export default class Posts extends Component {
 			this.handleFetch();
 		}
 	}
+
 	handleFetch() {
 		this.setState({
 			posts: null,
