@@ -5,6 +5,7 @@ import queryString from 'query-string';
 import Title from './Title';
 import PostMetaInfo from './PostMetaInfo';
 import Comment from './Comment';
+import Loading from './Loading';
 
 export default class Post extends Component {
 	constructor(props) {
@@ -23,14 +24,14 @@ export default class Post extends Component {
 		const { id } = queryString.parse(this.props.location.search);
 
 		fetchItem(id)
-			.then(post => {
+			.then((post) => {
 				this.setState({
 					post,
 					loadingPost: false,
 				});
 				return fetchComments(post.kids || []);
 			})
-			.then(comments => {
+			.then((comments) => {
 				this.setState({
 					comments,
 					loadingComments: false,
@@ -56,7 +57,7 @@ export default class Post extends Component {
 		return (
 			<>
 				{loadingPost === true ? (
-					<p>fetching post</p>
+					<Loading text='Fetching Post' />
 				) : (
 					<>
 						<h1 className='header'>
@@ -72,10 +73,10 @@ export default class Post extends Component {
 					</>
 				)}
 				{loadingComments === true ? (
-					loadingPost === false && <p>fetching comments</p>
+					loadingPost === false && <Loading text='Fetching Comments' />
 				) : (
 					<>
-						{comments.map(comment => (
+						{comments.map((comment) => (
 							<Comment key={comment.id} comment={comment} />
 						))}
 					</>

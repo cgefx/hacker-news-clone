@@ -3,6 +3,7 @@ import queryString from 'query-string';
 import { fetchUser, fetchPosts } from '../utils/api';
 import { formatDate } from '../utils/helpers';
 import PostsList from './PostsList';
+import Loading from './Loading';
 
 export default class User extends Component {
 	constructor(props) {
@@ -21,7 +22,7 @@ export default class User extends Component {
 		const { id } = queryString.parse(this.props.location.search);
 
 		fetchUser(id)
-			.then(user => {
+			.then((user) => {
 				this.setState({
 					user,
 					loadingUser: false,
@@ -29,7 +30,7 @@ export default class User extends Component {
 
 				return fetchPosts(user.submitted.slice(0, 30));
 			})
-			.then(posts => {
+			.then((posts) => {
 				this.setState({
 					posts,
 					loadingPosts: false,
@@ -54,7 +55,7 @@ export default class User extends Component {
 		return (
 			<>
 				{loadingUser === true ? (
-					<p>Fetching User</p>
+					<Loading text='Fetching User' />
 				) : (
 					<>
 						<h1 className='header'>{user.id}</h1>
@@ -66,7 +67,7 @@ export default class User extends Component {
 					</>
 				)}
 				{loadingPosts === true ? (
-					loadingUser === false && <p>Fetching posts</p>
+					loadingUser === false && <Loading text='Fetching Posts' />
 				) : (
 					<>
 						<h2>Posts</h2>

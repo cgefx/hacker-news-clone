@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { fetchMainPosts } from '../utils/api';
 import PostsList from './PostsList';
+import Loading from './Loading';
 
 export default class Posts extends Component {
 	constructor(props) {
@@ -32,7 +33,7 @@ export default class Posts extends Component {
 		});
 
 		fetchMainPosts(this.props.type)
-			.then(posts =>
+			.then((posts) =>
 				this.setState({
 					posts,
 					loading: false,
@@ -51,13 +52,12 @@ export default class Posts extends Component {
 		const { posts, error, loading } = this.state;
 
 		if (loading === true) {
-			return <p>Loading</p>; //!make component
+			return <Loading />;
 		}
 
 		if (error) {
 			return <p className='center-text error'>{error}</p>; //!maybe make component
 		}
-		console.log(posts);
 		return <PostsList posts={posts} />;
 	}
 }
