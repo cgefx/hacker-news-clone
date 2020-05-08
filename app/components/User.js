@@ -7,17 +7,13 @@ import Loading from './Loading';
 import { ThemeConsumer } from '../contexts/theme';
 
 export default class User extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			user: null,
-			loadingUser: true,
-			posts: null,
-			loadingPosts: true,
-			error: null,
-		};
-	}
+	state = {
+		user: null,
+		loadingUser: true,
+		posts: null,
+		loadingPosts: true,
+		error: null,
+	};
 
 	componentDidMount() {
 		const { id } = queryString.parse(this.props.location.search);
@@ -63,8 +59,12 @@ export default class User extends Component {
 							<>
 								<h1 className='header'>{user.id}</h1>
 								<div className={`meta-info-${theme}`}>
-									<span>joined {formatDate(user.created)}</span>
-									<span>has {user.karma.toLocaleString()} karma</span>
+									<span>
+										Joined <b>{formatDate(user.created)}</b>
+									</span>
+									<span>
+										has <b>{user.karma.toLocaleString()}</b> karma
+									</span>
 								</div>
 								<p dangerouslySetInnerHTML={{ __html: user.about }} />
 							</>

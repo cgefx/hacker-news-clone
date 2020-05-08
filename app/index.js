@@ -2,11 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Nav from './components/Nav';
-import Posts from './components/Posts';
-import Post from './components/Post';
-import User from './components/User';
+import Loading from './components/Loading';
 import { ThemeProvider } from './contexts/theme';
 import './index.css';
+
+const Posts = React.lazy(() => import('./components/Posts'));
+const Post = React.lazy(() => import('./components/Post'));
+const User = React.lazy(() => import('./components/User'));
 
 class App extends React.Component {
 	constructor(props) {
@@ -28,13 +30,19 @@ class App extends React.Component {
 					<div className={this.state.theme}>
 						<div className='container'>
 							<Nav />
-							<Switch>
-								<Route exact path='/' render={() => <Posts type='top' />} />
-								<Route exact path='/new' render={() => <Posts type='new' />} />
-								<Route path='/post' component={Post} />
-								<Route path='/user' component={User} />
-								<Route render={() => <h1>404</h1>} />
-							</Switch>
+							<React.Suspense fallback={<Loading />}>
+								<Switch>
+									<Route exact path='/' render={() => <Posts type='top' />} />
+									<Route
+										exact
+										path='/new'
+										render={() => <Posts type='new' />}
+									/>
+									<Route path='/post' component={Post} />
+									<Route path='/user' component={User} />
+									<Route render={() => <h1>404</h1>} />
+								</Switch>
+							</React.Suspense>
 						</div>
 					</div>
 				</ThemeProvider>

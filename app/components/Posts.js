@@ -5,15 +5,11 @@ import PostsList from './PostsList';
 import Loading from './Loading';
 
 export default class Posts extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			posts: null,
-			error: null,
-			loading: true,
-		};
-	}
+	state = {
+		posts: null,
+		error: null,
+		loading: true,
+	};
 
 	componentDidMount() {
 		this.handleFetch();

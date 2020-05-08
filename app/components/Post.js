@@ -1,24 +1,19 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { fetchItem, fetchPosts, fetchComments } from '../utils/api';
 import queryString from 'query-string';
+import { fetchItem, fetchComments } from '../utils/api';
 import Title from './Title';
 import PostMetaInfo from './PostMetaInfo';
 import Comment from './Comment';
 import Loading from './Loading';
 
 export default class Post extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			post: null,
-			loadingPost: true,
-			comments: null,
-			loadingComments: true,
-			error: null,
-		};
-	}
+	state = {
+		post: null,
+		loadingPost: true,
+		comments: null,
+		loadingComments: true,
+		error: null,
+	};
 
 	componentDidMount() {
 		const { id } = queryString.parse(this.props.location.search);
