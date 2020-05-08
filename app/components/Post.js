@@ -4,6 +4,7 @@ import { fetchItem, fetchPosts, fetchComments } from '../utils/api';
 import queryString from 'query-string';
 import Title from './Title';
 import PostMetaInfo from './PostMetaInfo';
+import Comment from './Comment';
 
 export default class Post extends Component {
 	constructor(props) {
@@ -51,6 +52,7 @@ export default class Post extends Component {
 			return <p>{error}</p>;
 		}
 
+		console.log(comments);
 		return (
 			<>
 				{loadingPost === true ? (
@@ -66,7 +68,16 @@ export default class Post extends Component {
 							id={post.id}
 							descendants={post.descendants}
 						/>
-						<p>post text will go here</p>
+						<p dangerouslySetInnerHTML={{ __html: post.text }} />
+					</>
+				)}
+				{loadingComments === true ? (
+					loadingPost === false && <p>fetching comments</p>
+				) : (
+					<>
+						{comments.map(comment => (
+							<Comment key={comment.id} comment={comment} />
+						))}
 					</>
 				)}
 			</>
